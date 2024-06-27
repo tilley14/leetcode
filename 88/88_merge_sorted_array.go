@@ -6,6 +6,8 @@ import (
 )
 
 func merge(nums1 []int, m int, nums2 []int, n int) {
+	// Temp copy of nums1 because nums1 is an out parameter
+	// An improvement could be to try and do this in place
 	tmp1 := make([]int, len(nums1))
 	copy(tmp1, nums1)
 
@@ -13,6 +15,7 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 	j := 0
 	k := 0
 
+	// Merge until we have merged all elements of nums1 or nums2
 	for ; j < m && k < n; i++ {
 		if tmp1[j] < nums2[k] {
 			nums1[i] = tmp1[j]
@@ -23,6 +26,7 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 		}
 	}
 
+	// Merge the remaining elements
 	for j < m {
 		nums1[i] = tmp1[j]
 		j++
@@ -33,6 +37,38 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 		nums1[i] = nums2[k]
 		k++
 		i++
+	}
+}
+
+// Mergin' Bakrds!
+func merge_bakrds(nums1 []int, m int, nums2 []int, n int) {
+	// Merging backwards avoids having to do the copy
+	i := m + n - 1
+	j := m - 1
+	k := n - 1
+
+	// Merge until we have merged all elements of nums1 or nums2
+	for ; j >= 0 && k >= 0; i-- {
+		if nums1[j] >= nums2[k] {
+			nums1[i] = nums1[j]
+			j--
+		} else {
+			nums1[i] = nums2[k]
+			k--
+		}
+	}
+
+	// Merge the remaining elements
+	for j >= 0 {
+		nums1[i] = nums1[j]
+		j--
+		i--
+	}
+
+	for k >= 0 {
+		nums1[i] = nums2[k]
+		k--
+		i--
 	}
 }
 
