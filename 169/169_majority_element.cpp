@@ -26,3 +26,31 @@ public:
         return max_elm;
     }
 };
+
+class Solution2 {
+public:
+    int majorityElement(vector<int>& nums) {
+        std::sort(nums.begin(), nums.end());
+        return nums[nums.size()/2);
+    }
+};
+
+// boyer-moore-majority-voting-algorithm
+class Solution3 {
+public:
+    int majorityElement(vector<int>& nums) {
+        int elm = -1;
+        int count = 0;
+
+        for (int n : nums) {
+            if (count == 0) {
+                elm = n;
+            }
+            count += (elm == n)? 1 : -1;
+        } 
+
+        // We don't need to verify that elm's occurance is > n/2 becuase
+        // that was guaranteed in the problem statement        
+        return elm;
+    }
+};
