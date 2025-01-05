@@ -41,14 +41,14 @@ public:
             }
         }
 
-        // // Add any outstanding carry over values
-        // while (sum != 0) {
-        //     node->next = new ListNode();
-        //     node = node->next;
+        // Add any outstanding carry over values
+        while (sum != 0) {
+            node->next = new ListNode();
+            node = node->next;
 
-        //     node->val = sum % 10;
-        //     sum /= 10;
-        // }
+            node->val = sum % 10;
+            sum /= 10;
+        }
 
         return head;
     }
